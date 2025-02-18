@@ -42,7 +42,7 @@ int main(void) {
         exit(EXIT_FAILURE);
     }
     
-    double mincl = 5, mdecl = 38, fincl = 5, fdecl = 38, magn = 2;
+    double mincl = 45, mdecl = 120, fincl = 45, fdecl = 120, magn = 2;
     double x0min = -800, x0max = 800, y0min = -800, y0max = 800, z0val = 0;
     double x1 = -50, y1 = -50, z1 = 100, x2 = 50, y2 = 50;
 

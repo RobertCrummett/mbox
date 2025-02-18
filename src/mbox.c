@@ -1,16 +1,13 @@
 #include <math.h>
 #include <stddef.h>
 
+#include "mag.h"
 #include "mbox.h"
 
-void mbox_dircos(double incl, double decl, double azim, double* a, double* b, double* c) {
-    const double deg2rad = 0.017453292519943295;
-    double xincl = incl * deg2rad;
-    double xdecl = decl * deg2rad;
-    double xazim = azim * deg2rad;
-    *a = cos(xincl) * cos(xdecl - xazim);
-    *b = cos(xincl) * sin(xdecl - xazim);
-    *c = sin(xincl);
+void mbox_swap(double* a, double *b) {
+    double t = *a;
+    *a = *b;
+    *b = t;
 }
 
 void mbox_mbox(double* x0, double* y0, double* z0, size_t n, double x1, double y1, double z1, double x2, double y2,
@@ -20,8 +17,12 @@ void mbox_mbox(double* x0, double* y0, double* z0, size_t n, double x1, double y
     size_t i,j,k;
     double ma,mb,mc,fa,fb,fc,fm1,fm2,fm3,fm4,fm5,fm6;
 
-    mbox_dircos(mincl, mdecl, 0.0, &ma, &mb, &mc);
-    mbox_dircos(fincl, fdecl, 0.0, &fa, &fb, &fc);
+    mag_incdec2xyz(mincl, mdecl, &ma, &mb, &mc);
+    mag_incdec2xyz(fincl, fdecl, &fa, &fb, &fc);
+
+    /* Flip the z sign - Blakely works in a left handed coordinate system */
+    mc *= -1;
+    fc *= -1;
 
     fm1 = ma*fb + mb*fa;
     fm2 = ma*fc + mc*fa;
