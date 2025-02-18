@@ -44,7 +44,7 @@ int main(void) {
     
     double mincl = 5, mdecl = 38, fincl = 5, fdecl = 38, magn = 2;
     double x0min = -800, x0max = 800, y0min = -800, y0max = 800, z0val = 0;
-    double x1 = -100, y1 = -100, z1 = 100, x2 = 100, y2 = 100;
+    double x1 = -50, y1 = -50, z1 = 100, x2 = 50, y2 = 50;
 
     double x,y;
     for (i = 0; i < N; i++) {
